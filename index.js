@@ -1,8 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 import { User } from "./Schemas/user-schema.js";
 import { connectDB } from "./connectDB.js";
 import authRouter from "./router/auth/auth.js"
+import foodCategoryRouter from "./router/food-category/food-category-router.js"
 const app = express();
 
 const PORT = 1000;
@@ -11,15 +12,9 @@ app.use(express.json());
 
 connectDB();
 
-app.get("/app/health", (request, response) => {
-  response.json({ message: `API HEALTHY RUNNING ON ${PORT}` });
-}); // read
-
 app.use("/auth/", authRouter);
 
-// app.post("/sign-up",);
-
-
+app.use("/food-category", foodCategoryRouter)
 
 app.post("/food/category", async (request, response) => {
   try {
@@ -40,12 +35,6 @@ app.listen(PORT, () => {
   console.log(`server is running, on port ${PORT}`);
 });
 
-// process.on('uncaughtException', (err) => {
-//   console.log('UNCAUGHT EXCEPTION:', err);
-// });
 
-// process.on('exit', (code) => {
-//   console.log('Process exited with code:', code);
-// });
 
 // mongodb+srv://enkhtuya:ty7890ghjy@food-delivery.daacozk.mongodb.net/
