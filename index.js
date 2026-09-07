@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { User } from "./Schemas/user-schema.js";
 import { connectDB } from "./connectDB.js";
-
+import authRouter from "./router/auth/auth.js"
 const app = express();
 
 const PORT = 1000;
@@ -15,34 +15,25 @@ app.get("/app/health", (request, response) => {
   response.json({ message: `API HEALTHY RUNNING ON ${PORT}` });
 }); // read
 
-app.post("/sign-up", async (request, response) => {
+app.use("/auth/", authRouter);
+
+// app.post("/sign-up",);
+
+
+
+app.post("/food/category", async (request, response) => {
   try {
-    const { email, password } = request.body;
-    const user = await User.create({ email, password });
-
-    // Энэ мөр терминал дээр хэвлэж харуулна:
-    console.log("--> Шинэ хэрэглэгч амжилттай хадгалагдлаа:", user);
-
-    response.status(201).json({ message: "posted", user });
-  } catch (error) {
-    console.log("Алдаа гарлаа:", error);
-    response.status(500).json({ error: error.message });
-  }
-});
-
-app.post("/login", async (request, response) => {
-  try {
-    const { email, password } = request.body;
-    console.log(email, password);
-    const user = await User.findOne({ email: email });
+    const { categoryName, CreatedAt, UpdatedAt } = request.body;
+    console.log(hool);
+    const user = await User.findOne({ hool: hool });
     if (!user) {
-      response.status(404).json({ message: "user not found" });
+      return response.status(404).json({ message: "user not found" });
     }
-    response.status(200).json({ message: "user found", user: user });
+    return response.status(200).json({ message: "user found", user: user });
   } catch (error) {
-    response
+    return response
       .status(500)
-      .json({ message: "Internal Server Error", error: error });
+      .json({ message: "Internal Server Error", error: error.message });
   }
 });
 app.listen(PORT, () => {
