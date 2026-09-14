@@ -1,20 +1,17 @@
 import express from "express";
 import { createFoodCategoryController } from "../../controllers/food-category/create-food-category.js";
+import { deleteFoodCategoryController } from "../../controllers/food-category/delete-food-category.js";
+import { updateFoodCategoryController } from "../../controllers/food-category/update-food-category.js";
+import { getFoodCategoryController } from "../../controllers/food-category/get-food-category.js";
 
 const router = express.Router();
 
-router.post("/create",createFoodCategoryController );
+router.post("/create", createFoodCategoryController);
 
-router.delete("/delete", async (request, response) => {
-  return response.status(200).json({ message: "food category delete" });
-});
+router.delete("/delete", deleteFoodCategoryController);
 
-router.put("/update", async (request, response) => {
-  return response.status(200).json({ message: "food category update" });
-});
+router.put("/update", updateFoodCategoryController);
 
-router.get("/get", async (request, response) => {
-  return response.status(200).json({ message: "food category read" });
-});
+router.get("/get", getFoodCategoryController);
 
 export default router;
