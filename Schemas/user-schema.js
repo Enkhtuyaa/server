@@ -5,9 +5,9 @@ export const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true, // enforces "no two accounts with the same email" at the DB level
-      lowercase: true,
-      trim: true,
+      // unique: true, // enforces "no two accounts with the same email" at the DB level
+      // lowercase: true,
+      // trim: true,
     },
     password: {
       type: String,
