@@ -2,8 +2,15 @@ import { foodCategory } from "../../Schemas/food-category.js";
 
 export const createFoodCategoryController = async (request, response) => {
   try {
-    const { name } = request.body;
-    const category = await foodCategory.create({ categoryName: name });
+    const { categoryName } = request.body;
+    if (!categoryName || !categoryName.trim()) {
+      return response
+        .status(400)
+        .json({ message: "Category name is required" });
+    }
+    const category = await foodCategory.create({
+      categoryName: categoryName.trim(),
+    });
     return response
       .status(201)
       .json({ message: "food category created", category });
