@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const SALT_ROUND = 10;
-const JWT_SECRET = "testing";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const signAuthToken = (user) => {
   return jwt.sign( {email: user.email, password: user.password}, JWT_SECRET, {
