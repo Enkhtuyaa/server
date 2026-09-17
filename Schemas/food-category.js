@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const foodCategorySchema = new mongoose.Schema(
   { categoryName: String },
   {
-    timestapms: {
+    timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at",
     },

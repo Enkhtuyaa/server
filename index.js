@@ -1,4 +1,4 @@
-import "dotenv/config"
+// import "dotenv/config"
 import express from "express";
 import cors from "cors"
 // import mongoose from "mongoose";
@@ -6,7 +6,7 @@ import { User } from "./Schemas/user-schema.js";
 import { connectDB } from "./connectDB.js";
 import authRouter from "./router/auth/auth.js"
 import foodCategoryRouter from "./router/food-category/food-category-router.js"
-
+import dishesCategoryRouter from "./router/dishes-category/dishes-category-router.js"
 
 const app = express();
 
@@ -20,7 +20,8 @@ connectDB();
 app.use("/auth", authRouter);
 
 app.use("/food-category", foodCategoryRouter)
-
+ 
+app.use("/dishes-category",dishesCategoryRouter )
 
 app.listen(PORT, () => {
   console.log(`server is running, on port ${PORT}`);

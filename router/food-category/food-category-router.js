@@ -5,19 +5,19 @@ import { updateFoodCategoryController } from "../../controllers/food-category/up
 import { getFoodCategoryController } from "../../controllers/food-category/get-food-category.js";
 
 const router = express.Router();
- const requiredCategoryName = (request, response, next) =>{
-    const { categoryName} = request.body
-    if(!categoryName) {
-        return response.status(400).json({ message: "categoryName is required" })
-    } else{
-        next()
-    }
- }
+//  const requiredCategoryName = (request, response, next) =>{
+//     const { categoryName} = request.body
+//     if(!categoryName) {
+//         return response.status(400).json({ message: "categoryName is required" })
+//     } else{
+//         next()
+//     }
+//  }
 
- const requireToken = (request, responses, next) => {
-    console.log(request.headers)
- }
-router.post("/create", requireToken,requiredCategoryName, createFoodCategoryController);
+//  const requireToken = (request, responses, next) => {
+//     console.log(request.headers)
+//  }
+router.post("/create",  createFoodCategoryController);
 
 router.delete("/delete", deleteFoodCategoryController);
 
