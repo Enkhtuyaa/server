@@ -2,11 +2,11 @@ import { dishesCategory } from "../../Schemas/dishes-category.js";
 
 export const createDishesCategoryController = async (request, response) => {
   try {
-    const { foodName, price, image, ingredients, category  } = request.body;
+    const { foodName, price, imageURL, ingredients, category  } = request.body;
     const categoryDishes = await dishesCategory.create({
       foodName: foodName,
       price: price,
-      image: image,
+      imageURL: imageURL,
       ingredients: ingredients,
       category: category,
     });

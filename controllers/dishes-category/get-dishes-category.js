@@ -2,7 +2,7 @@ import { dishesCategory } from "../../Schemas/dishes-category.js";
 
 export const getDishesCategoryController = async (request, response) => {
   try {
-    const categoryDishes = await dishesCategory.find().populate("category");
+    const categoryDishes = await dishesCategory.find();
     return response
       .status(200)
       .json({

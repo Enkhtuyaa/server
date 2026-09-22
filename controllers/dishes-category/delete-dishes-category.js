@@ -2,6 +2,7 @@ import { dishesCategory } from "../../Schemas/dishes-category.js";
 
 export const deleteDishesCategoryController = async ( request, response) => {
     try{
+         console.log("body:", request.body);
         const { id } = request.body
         const categoryDishes = await dishesCategory.findByIdAndDelete(id)
         if (!categoryDishes){

@@ -5,6 +5,8 @@ import { singUpController } from "../../controllers/auth/auth.js";
 
 const router = express.Router();
 
+
+
 router.post("/login", loginController);
 
 router.post("/sign-up", singUpController);

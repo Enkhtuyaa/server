@@ -3,21 +3,28 @@ import { createFoodCategoryController } from "../../controllers/food-category/cr
 import { deleteFoodCategoryController } from "../../controllers/food-category/delete-food-category.js";
 import { updateFoodCategoryController } from "../../controllers/food-category/update-food-category.js";
 import { getFoodCategoryController } from "../../controllers/food-category/get-food-category.js";
+import { requireAdmin } from "../../middleware/require-admin.js";
+import { requireToken } from "../../middleware/require-token.js";
+
 
 const router = express.Router();
-//  const requiredCategoryName = (request, response, next) =>{
-//     const { categoryName} = request.body
-//     if(!categoryName) {
-//         return response.status(400).json({ message: "categoryName is required" })
-//     } else{
-//         next()
-//     }
-//  }
 
-//  const requireToken = (request, responses, next) => {
-//     console.log(request.headers)
-//  }
-router.post("/create",  createFoodCategoryController);
+const requireCategoryName = (request, response, next) => {
+  const { categoryName } = request.body;
+  if (!categoryName) {
+    return response.status(400).json({ message: "categoryName is required" });
+  } else {
+    next();
+  }
+};
+
+router.post(
+  "/create",
+  requireToken,
+  requireAdmin,
+  requireCategoryName,
+  createFoodCategoryController,
+);
 
 router.delete("/delete", deleteFoodCategoryController);
 
